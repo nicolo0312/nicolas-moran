@@ -14,7 +14,7 @@
       --text: #eaeaf0;
       --muted: #a1a1b3;
       --primary: #7c3aed;
-      --primary-soft: rgba(124, 58, 237, 0.25);
+      --glow: rgba(124, 58, 237, 0.55);
       --border: rgba(255,255,255,0.08);
     }
 
@@ -29,11 +29,7 @@
       background: radial-gradient(circle at top, #15152a, var(--bg));
       color: var(--text);
       line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
+      overflow-x: hidden;
     }
 
     .container {
@@ -42,11 +38,12 @@
       padding: 80px 24px;
     }
 
-    /* Animations */
+    /* ================= ANIMATIONS ================= */
+
     .reveal {
       opacity: 0;
       transform: translateY(30px);
-      transition: all 0.8s ease;
+      transition: all 0.9s ease;
     }
 
     .reveal.visible {
@@ -54,15 +51,23 @@
       transform: translateY(0);
     }
 
-    /* HERO */
+    /* ================= HERO ================= */
+
     .hero {
       display: grid;
-      gap: 32px;
-      margin-bottom: 120px;
+      gap: 48px;
+      margin-bottom: 130px;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+      }
     }
 
     .hero h1 {
-      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      font-size: clamp(2.8rem, 5vw, 3.6rem);
       font-weight: 700;
       letter-spacing: -1px;
     }
@@ -75,6 +80,7 @@
       max-width: 720px;
       color: var(--muted);
       font-size: 1.15rem;
+      margin-top: 12px;
     }
 
     .cta {
@@ -89,18 +95,19 @@
       font-weight: 500;
       border: 1px solid var(--border);
       transition: all .25s ease;
+      text-decoration: none;
+      color: inherit;
     }
 
     .btn.primary {
       background: linear-gradient(135deg, var(--primary), #5b21b6);
-      color: white;
       border: none;
-      box-shadow: 0 0 0 transparent;
+      color: white;
     }
 
     .btn.primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px var(--primary-soft);
+      box-shadow: 0 14px 45px var(--glow);
     }
 
     .btn.secondary:hover {
@@ -108,8 +115,69 @@
       color: var(--primary);
     }
 
+    /* ================= PROFILE IMAGE ================= */
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .glow-wrapper {
+      position: relative;
+      width: 270px;
+      height: 270px;
+    }
+
+    .glow-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -25px;
+      background: radial-gradient(circle, var(--glow), transparent 65%);
+      filter: blur(45px);
+      opacity: 0.85;
+      animation: pulse 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.15);
+        opacity: 1;
+      }
+    }
+
+    .profile-image {
+      position: relative;
+      width: 270px;
+      height: 270px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(124,58,237,0.4);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+      transition: transform .35s ease;
+      z-index: 1;
+      background: #111;
+    }
+
+    .profile-image:hover {
+      transform: translateY(-8px);
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ================= SECTIONS ================= */
+
     section {
-      margin-bottom: 110px;
+      margin-bottom: 120px;
     }
 
     section h2 {
@@ -128,9 +196,23 @@
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
       border-color: rgba(124,58,237,0.4);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.45);
     }
+
+    .about-grid {
+      display: grid;
+      gap: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: 0.7fr 1.3fr;
+        align-items: center;
+      }
+    }
+
+    /* ================= STACK ================= */
 
     .stack {
       display: grid;
@@ -146,15 +228,12 @@
       font-size: 0.95rem;
     }
 
+    /* ================= EXPERIENCE ================= */
+
     .experience,
     .projects {
       display: grid;
       gap: 24px;
-    }
-
-    .experience h3,
-    .projects h3 {
-      margin-bottom: 8px;
     }
 
     .experience ul {
@@ -165,134 +244,215 @@
     footer {
       text-align: center;
       color: var(--muted);
-      padding-bottom: 40px;
       font-size: 0.9rem;
+      padding-bottom: 40px;
     }
 
-    @media (min-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-      }
-    }
+    /* ================= EXPERIENCE VISUAL ================= */
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.company-logo {
+  width: 64px;
+  height: 64px;
+  background: #0f0f1a;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-logo img {
+  width: 70%;
+  filter: grayscale(1) brightness(1.2);
+}
+
+.company-content h3 {
+  margin-bottom: 8px;
+}
+
+.stack-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.stack-icons img {
+  width: 28px;
+  height: 28px;
+  opacity: 0.75;
+  transition: all .25s ease;
+}
+
+.stack-icons img:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 6px rgba(124,58,237,0.6));
+}
+
+@media (max-width: 640px) {
+  .experience-item {
+    grid-template-columns: 1fr;
+  }
+
+  .company-logo {
+    margin-bottom: 8px;
+  }
+}
+
   </style>
 </head>
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- HERO -->
-    <section class="hero reveal">
-      <div>
-        <h1>Nicolas <span>Moran</span></h1>
-        <p>
-          Backend Developer especializado en <strong>APIs, integraciones y arquitectura de sistemas escalables</strong>.
-          Experiencia construyendo servicios confiables en entornos productivos, con foco en
-          comunicación entre sistemas, asincronía y evolución a largo plazo.
-        </p>
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div>
+      <h1>Nicolas <span>Moran</span></h1>
+      <p>
+        Backend Developer especializado en <strong>APIs, integraciones y arquitectura de sistemas escalables</strong>.
+        Experiencia construyendo servicios confiables en producción, con foco en
+        asincronía, comunicación entre sistemas y evolución a largo plazo.
+      </p>
 
-        <div class="cta">
-          <a class="btn primary" href="https://www.linkedin.com/in/nicol%C3%A1s-moran-110834110/" target="_blank">
-            Ver LinkedIn
-          </a>
-          <a class="btn secondary" href="mailto:contacto@nicolasmoran.dev">
-            Contacto directo
-          </a>
+      <div class="cta">
+        <a class="btn primary" href="https://www.linkedin.com/in/nicol%C3%A1s-moran-110834110/" target="_blank">
+          Ver LinkedIn
+        </a>
+        <a class="btn secondary" href="mailto:lenicoceran@gmail.com?subject=Contacto%20profesional">
+          Contacto directo
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <div class="glow-wrapper">
+        <div class="profile-image reveal">
+          <img src="image-cv.jpeg" alt="Nicolas Moran - Backend Developer">
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ABOUT -->
-    <section class="reveal">
-      <h2>Perfil profesional</h2>
-      <div class="card">
-        <p>
-          Backend Developer con foco en el diseño de sistemas mantenibles, integración entre múltiples
-          plataformas y resolución de problemas complejos.
-          Trabajo cerca del negocio para traducir necesidades reales en soluciones técnicas sólidas,
-          priorizando estabilidad, claridad y escalabilidad.
-        </p>
-      </div>
-    </section>
 
-    <!-- STACK -->
-    <section class="reveal">
-      <h2>Stack principal</h2>
-      <div class="stack">
-        <div>Node.js · TypeScript · NestJS · Express</div>
-        <div>AWS · Docker · Redis</div>
-        <div>SQL · MongoDB · MariaDB · SQL Server</div>
-        <div>Microservicios · Webhooks · Async flows</div>
-      </div>
-    </section>
+  <!-- STACK -->
+  <section class="reveal">
+    <h2>Stack principal</h2>
+    <div class="stack">
+      <div>Node.js · TypeScript · NestJS · Express</div>
+      <div>AWS · Docker · Redis</div>
+      <div>SQL · MongoDB · MariaDB · SQL Server</div>
+      <div>Microservicios · Webhooks · Async flows</div>
+    </div>
+  </section>
 
-    <!-- EXPERIENCE -->
-    <section class="reveal">
-      <h2>Experiencia relevante</h2>
-      <div class="experience">
+  <!-- EXPERIENCE -->
+  <section class="reveal">
+    <h2>Experiencia relevante</h2>
+    <div class="experience">
 
-        <div class="card">
-          <h3>Conexa — Backend Developer</h3>
-          <ul>
-            <li>Integraciones entre e-commerce, pagos y logística en producción</li>
-            <li>Arquitecturas desacopladas y flujos asincrónicos con webhooks</li>
-            <li>Consistencia de datos y comunicación confiable entre sistemas</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Intive — Backend Developer</h3>
-          <ul>
-            <li>Sistema de gestión para concesionarias a gran escala</li>
-            <li>Lógica de precios basada en inflación y reglas de negocio</li>
-            <li>Dashboards y métricas para toma de decisiones</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="reveal">
-      <h2>Proyectos destacados</h2>
-      <div class="projects">
-
-        <div class="card">
-          <h3>DOXTOR</h3>
-          <p>
-            Plataforma de digitalización de documentos con OCR y procesamiento asincrónico.
-            Arquitectura CQRS y queue jobs sobre Redis, orientada a escalabilidad.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>BLEO</h3>
-          <p>
-            Plataforma basada en IA para eficiencia energética empresarial,
-            con procesamiento intensivo de datos y servicios backend escalables.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <footer>
-      © 2026 — Nicolas Moran · Backend Developer
-    </footer>
-
+<div class="card experience-item reveal">
+  <div class="company-logo">
+    <img src="conexa.png" alt="Conexa">
   </div>
 
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.15 });
+  <div class="company-content">
+    <h3>Conexa — Backend Developer</h3>
+    <ul>
+      <li>Integraciones entre e-commerce, pagos y logística en producción</li>
+      <li>Arquitecturas desacopladas y flujos asincrónicos con webhooks</li>
+      <li>Consistencia de datos y comunicación confiable entre sistemas</li>
+    </ul>
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+    <div class="stack-icons">
+      <img src="nodejs.png" alt="Node.js">
+      <img src="typeScript.png" alt="TypeScript">
+      <img src="nestjs.png" alt="NestJS">
+      <img src="aws.png" alt="AWS">
+      <img src="docker.png" alt="Docker">
+      <img src="mongodb.png" alt="MongoDB">
+      <img src="sql.png" alt="SQL">
+    </div>
+  </div>
+</div>
+
+
+<div class="card experience-item reveal">
+  <div class="company-logo">
+    <img src="asofix.png" alt="Intive">
+  </div>
+
+  <div class="company-content">
+    <h3>Intive — Backend Developer</h3>
+    <ul>
+      <li>Sistema de gestión para concesionarias a gran escala</li>
+      <li>Lógica de precios basada en inflación y reglas de negocio</li>
+      <li>Dashboards y métricas para toma de decisiones</li>
+    </ul>
+
+    <div class="stack-icons">
+      <img src="nodejs.png" alt="Node.js">
+      <img src="typeScript.png" alt="TypeScript">
+      <img src="express.png" alt="Express">
+      <img src="sql.png" alt="SQL">
+      <img src="docker.png" alt="Docker">
+      <img src="aws.png" alt="AWS">
+    </div>
+  </div>
+</div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="reveal">
+    <h2>Proyectos destacados</h2>
+    <div class="projects">
+
+      <div class="card">
+        <h3>DOXTOR</h3>
+        <p>
+          Plataforma de digitalización de documentos con OCR y procesamiento asincrónico,
+          arquitectura CQRS y queue jobs sobre Redis.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>BLEO</h3>
+        <p>
+          Plataforma basada en IA para eficiencia energética empresarial,
+          con procesamiento intensivo de datos.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2026 — Nicolas Moran · Backend Developer
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
