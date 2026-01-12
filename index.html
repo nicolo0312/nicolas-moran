@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicolas Moran | Backend Developer</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0b12;
+      --bg-secondary: #12121c;
+      --text: #eaeaf0;
+      --muted: #a1a1b3;
+      --primary: #7c3aed;
+      --primary-soft: rgba(124, 58, 237, 0.25);
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #15152a, var(--bg));
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    /* Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      gap: 32px;
+      margin-bottom: 120px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    .cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      transition: all .25s ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--primary), #5b21b6);
+      color: white;
+      border: none;
+      box-shadow: 0 0 0 transparent;
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px var(--primary-soft);
+    }
+
+    .btn.secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    section {
+      margin-bottom: 110px;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 28px;
+      letter-spacing: -0.5px;
+    }
+
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      border-color: rgba(124,58,237,0.4);
+    }
+
+    .stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .stack div {
+      background: rgba(124,58,237,0.06);
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+    }
+
+    .experience,
+    .projects {
+      display: grid;
+      gap: 24px;
+    }
+
+    .experience h3,
+    .projects h3 {
+      margin-bottom: 8px;
+    }
+
+    .experience ul {
+      margin-left: 18px;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding-bottom: 40px;
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero reveal">
+      <div>
+        <h1>Nicolas <span>Moran</span></h1>
+        <p>
+          Backend Developer especializado en <strong>APIs, integraciones y arquitectura de sistemas escalables</strong>.
+          Experiencia construyendo servicios confiables en entornos productivos, con foco en
+          comunicación entre sistemas, asincronía y evolución a largo plazo.
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="https://www.linkedin.com/in/nicol%C3%A1s-moran-110834110/" target="_blank">
+            Ver LinkedIn
+          </a>
+          <a class="btn secondary" href="mailto:contacto@nicolasmoran.dev">
+            Contacto directo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="reveal">
+      <h2>Perfil profesional</h2>
+      <div class="card">
+        <p>
+          Backend Developer con foco en el diseño de sistemas mantenibles, integración entre múltiples
+          plataformas y resolución de problemas complejos.
+          Trabajo cerca del negocio para traducir necesidades reales en soluciones técnicas sólidas,
+          priorizando estabilidad, claridad y escalabilidad.
+        </p>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section class="reveal">
+      <h2>Stack principal</h2>
+      <div class="stack">
+        <div>Node.js · TypeScript · NestJS · Express</div>
+        <div>AWS · Docker · Redis</div>
+        <div>SQL · MongoDB · MariaDB · SQL Server</div>
+        <div>Microservicios · Webhooks · Async flows</div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="reveal">
+      <h2>Experiencia relevante</h2>
+      <div class="experience">
+
+        <div class="card">
+          <h3>Conexa — Backend Developer</h3>
+          <ul>
+            <li>Integraciones entre e-commerce, pagos y logística en producción</li>
+            <li>Arquitecturas desacopladas y flujos asincrónicos con webhooks</li>
+            <li>Consistencia de datos y comunicación confiable entre sistemas</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Intive — Backend Developer</h3>
+          <ul>
+            <li>Sistema de gestión para concesionarias a gran escala</li>
+            <li>Lógica de precios basada en inflación y reglas de negocio</li>
+            <li>Dashboards y métricas para toma de decisiones</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="reveal">
+      <h2>Proyectos destacados</h2>
+      <div class="projects">
+
+        <div class="card">
+          <h3>DOXTOR</h3>
+          <p>
+            Plataforma de digitalización de documentos con OCR y procesamiento asincrónico.
+            Arquitectura CQRS y queue jobs sobre Redis, orientada a escalabilidad.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>BLEO</h3>
+          <p>
+            Plataforma basada en IA para eficiencia energética empresarial,
+            con procesamiento intensivo de datos y servicios backend escalables.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      © 2026 — Nicolas Moran · Backend Developer
+    </footer>
+
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
